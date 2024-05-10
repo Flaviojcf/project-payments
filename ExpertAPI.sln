@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34701.34
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExpertAPI", "ExpertAPI\ExpertAPI.csproj", "{FB7FA692-D87F-45A1-A750-8265DDEB4178}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Expert.API", "ExpertAPI\Expert.API.csproj", "{FB7FA692-D87F-45A1-A750-8265DDEB4178}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Expert.Domain", "Expert.Domain\Expert.Domain.csproj", "{7C147099-C8F2-494D-8179-68CC0A2021F7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Expert.Infrastructure", "Expert.Infrastructure\Expert.Infrastructure.csproj", "{4A8D7800-BCC8-49F7-8D74-45D4C27E9ADC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Expert.Infrastructure", "Expert.Infrastructure\Expert.Infrastructure.csproj", "{4A8D7800-BCC8-49F7-8D74-45D4C27E9ADC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Expert.Application", "Expert.Application\Expert.Application.csproj", "{F2D603FF-4428-45DE-B920-EE9564BF1E5C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Expert.Application", "Expert.Application\Expert.Application.csproj", "{F2D603FF-4428-45DE-B920-EE9564BF1E5C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
