@@ -4,7 +4,7 @@ namespace Expert.Infrastructure.Persistance
 {
     public class ExpertDbContext
     {
-        public ExpertDbContext() 
+        public ExpertDbContext()
         {
             Projects =
             [

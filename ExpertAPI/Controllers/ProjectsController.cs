@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System.Reflection;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace ExpertAPI.Controllers
 {

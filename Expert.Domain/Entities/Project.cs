@@ -28,7 +28,7 @@ namespace Expert.Domain.Entities
             if (Status == ProjecStatusEnum.Created)
             {
                 Status = ProjecStatusEnum.InProgress;
-                StartedAt = DateTime.Now;   
+                StartedAt = DateTime.Now;
             }
         }
 
@@ -47,6 +47,6 @@ namespace Expert.Domain.Entities
             Description = description;
             TotalCost = totalCost;
         }
-      
+
     }
 }

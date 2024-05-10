@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Expert.Application.OutPutModels
+﻿namespace Expert.Application.OutPutModels
 {
     public class ProjectDetailsOutputModel(int id, string title, string description, decimal totalCost, DateTime? startedAt, DateTime? finishedAt)
     {

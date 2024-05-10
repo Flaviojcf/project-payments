@@ -6,13 +6,9 @@ using Expert.Infrastructure.Persistance;
 
 namespace Expert.Application.Services.Implementations
 {
-    public class ProjectService : IProjectService
+    public class ProjectService(ExpertDbContext dbContext) : IProjectService
     {
-        private readonly ExpertDbContext _dbContext;
-        public ProjectService(ExpertDbContext dbContext)
-        {
-            _dbContext = dbContext;
-        }
+        private readonly ExpertDbContext _dbContext = dbContext;
 
         public int Create(CreateProjectInputModel inputModel)
         {
@@ -48,7 +44,7 @@ namespace Expert.Application.Services.Implementations
         {
             var projects = _dbContext.Projects;
 
-            var projectsOutPut = projects.Select(p => new ProjectOutputModel(p.Title, p.CreatedAt)).ToList();
+            var projectsOutPut = projects.Select(p => new ProjectOutputModel(p.Id, p.Title, p.CreatedAt)).ToList();
 
             return projectsOutPut;
         }
