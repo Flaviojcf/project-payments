@@ -11,5 +11,6 @@
         public List<UserSkill> UserSkills { get; private set; } = new List<UserSkill>();
         public List<Project> OwnedProjects { get; private set; } = new List<Project>();
         public List<Project> FreelanceProjects { get; private set; } = new List<Project>();
+        public List<ProjectComment> Comments { get; private set; }
     }
 }

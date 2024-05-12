@@ -13,7 +13,10 @@ namespace Expert.Domain.Entities
         public ProjecStatusEnum Status { get; private set; } = ProjecStatusEnum.Created;
 
         public List<ProjectComment> Comments { get; private set; } = new List<ProjectComment>();
+        public User Client { get; private set; }
         public int IdClient { get; private set; } = idClient;
+
+        public User Freelancer { get; private set; }
         public int IdFreelancer { get; private set; } = idFreelancer;
 
 
