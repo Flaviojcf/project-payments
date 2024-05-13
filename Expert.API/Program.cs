@@ -1,6 +1,7 @@
 using Expert.Application.Services.Implementations;
 using Expert.Application.Services.Interfaces;
 using Expert.Infrastructure.Persistance;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,7 +12,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddSingleton<ExpertDbContext>();
+builder.Services.AddDbContext<ExpertDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddScoped<IProjectService, ProjectService>();
 
 var app = builder.Build();
