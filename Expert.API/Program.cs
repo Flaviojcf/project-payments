@@ -17,7 +17,6 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ExpertDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddScoped<IProjectService, ProjectService>();
 builder.Services.AddScoped<IUserService, UserService>();
-builder.Services.AddScoped<ISkillService, SkillService>();
 
 builder.Services.AddMediatR(typeof(CreateProjectCommand));
 

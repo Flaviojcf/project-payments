@@ -3,7 +3,8 @@ using Expert.Application.Commands.DeleteProject;
 using Expert.Application.Commands.FinishProject;
 using Expert.Application.Commands.StartProject;
 using Expert.Application.Commands.UpdateProject;
-using Expert.Application.Services.Interfaces;
+using Expert.Application.Queries.GetAllProjects;
+using Expert.Application.Queries.GetProjectById;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,23 +12,27 @@ namespace ExpertAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProjectsController(IProjectService projectService, IMediator mediator) : ControllerBase
+    public class ProjectsController(IMediator mediator) : ControllerBase
     {
-        private readonly IProjectService _projectService = projectService;
+
         private readonly IMediator _mediator = mediator;
 
         [HttpGet]
-        public IActionResult Get(string query)
+        public async Task<IActionResult> Get(string query)
         {
-            var projects = _projectService.GetAll(query);
+            var getAllProjectsQuery = new GetAllProjectsQuery(query);
+
+            var projects = await _mediator.Send(getAllProjectsQuery);
 
             return Ok(projects);
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetById(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            var project = _projectService.GetById(id);
+            var command = new GetProjectByIdQuery(id);
+
+            var project = await _mediator.Send(command);
 
             if (project == null)
             {
