@@ -1,12 +1,22 @@
-﻿using MediatR;
+﻿using Expert.Domain.Entities;
+using Expert.Infrastructure.Persistance;
+using MediatR;
 
 namespace Expert.Application.Commands.CreateProject
 {
-    public class CreateProjectCommandHandler : IRequestHandler<CreateProjectCommand, int>
+    public class CreateProjectCommandHandler(ExpertDbContext dbContext) : IRequestHandler<CreateProjectCommand, int>
     {
-        public Task<int> Handle(CreateProjectCommand request, CancellationToken cancellationToken)
+        private readonly ExpertDbContext _dbContext = dbContext;
+
+        public async Task<int> Handle(CreateProjectCommand request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var project = new Project(request.Title, request.Description, request.TotalCost, request.IdCliente, request.IdFreelancer);
+
+            await _dbContext.Projects.AddAsync(project);
+
+            await _dbContext.SaveChangesAsync();
+
+            return project.Id;
         }
     }
 }

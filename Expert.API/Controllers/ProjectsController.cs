@@ -1,14 +1,17 @@
-﻿using Expert.Application.InputModels;
+﻿using Expert.Application.Commands.CreateProject;
+using Expert.Application.InputModels;
 using Expert.Application.Services.Interfaces;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ExpertAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProjectsController(IProjectService projectService) : ControllerBase
+    public class ProjectsController(IProjectService projectService, IMediator mediator) : ControllerBase
     {
         private readonly IProjectService _projectService = projectService;
+        private readonly IMediator _mediator = mediator;
 
         [HttpGet]
         public IActionResult Get(string query)
@@ -32,13 +35,13 @@ namespace ExpertAPI.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] CreateProjectInputModel inputModel)
+        public async Task<IActionResult> Post([FromBody] CreateProjectCommand command)
         {
-            if (inputModel.Title.Length > 50) return BadRequest();
+            if (command.Title.Length > 50) return BadRequest();
 
-            var id = _projectService.Create(inputModel);
+            var id = await _mediator.Send(command);
 
-            return CreatedAtAction(nameof(GetById), new { id = id }, inputModel);
+            return CreatedAtAction(nameof(GetById), new { id }, command);
         }
 
         [HttpPut("{id}")]
