@@ -1,5 +1,8 @@
 ﻿using Expert.Application.Commands.CreateProject;
-using Expert.Application.InputModels;
+using Expert.Application.Commands.DeleteProject;
+using Expert.Application.Commands.FinishProject;
+using Expert.Application.Commands.StartProject;
+using Expert.Application.Commands.UpdateProject;
 using Expert.Application.Services.Interfaces;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -45,44 +48,50 @@ namespace ExpertAPI.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] UpdateProjectInputModel inputModel)
+        public async Task<IActionResult> Put(int id, [FromBody] UpdateProjectCommand command)
         {
-            if (inputModel.Title.Length > 200) return BadRequest();
+            if (command.Title.Length > 200) return BadRequest();
 
-            _projectService.Update(inputModel);
+            await _mediator.Send(command);
 
             return NoContent();
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            _projectService.Delete(id);
+            var command = new DeleteProjectCommand(id);
+
+            await _mediator.Send(command);
 
             return NoContent();
         }
 
 
         [HttpPost("{id}/comments")]
-        public IActionResult PostComment([FromBody] CreateCommentInputModel inputModel)
+        public async Task<IActionResult> PostComment([FromBody] CreateCommentCommand command)
         {
-            _projectService.CreateComment(inputModel);
+            await _mediator.Send(command);
 
             return NoContent();
         }
 
         [HttpPut("{id}/start")]
-        public IActionResult Start(int id)
+        public async Task<IActionResult> Start(int id)
         {
-            _projectService.Start(id);
+            var command = new StartProjectCommand(id);
+
+            await _mediator.Send(command);
 
             return NoContent();
         }
 
         [HttpPut("{id}/finish")]
-        public IActionResult Finish(int id)
+        public async Task<IActionResult> Finish(int id)
         {
-            _projectService.Finish(id);
+            var command = new FinishProjectCommand(id);
+
+            await _mediator.Send(command);
 
             return NoContent();
         }
