@@ -1,19 +1,19 @@
-﻿using Expert.Infrastructure.Persistance;
+﻿using Expert.Domain.Repositories;
 using MediatR;
 
 namespace Expert.Application.Commands.UpdateProject
 {
-    public class UpdateProjectCommandHandler(ExpertDbContext dbContext) : IRequestHandler<UpdateProjectCommand, Unit>
+    public class UpdateProjectCommandHandler(IProjectRepository projectRepository) : IRequestHandler<UpdateProjectCommand, Unit>
     {
-        private readonly ExpertDbContext _dbContext = dbContext;
+        private readonly IProjectRepository _projectRepository = projectRepository;
 
         public async Task<Unit> Handle(UpdateProjectCommand request, CancellationToken cancellationToken)
         {
-            var project = _dbContext.Projects.SingleOrDefault(p => p.Id == request.Id);
+            var project = await _projectRepository.GetByIdAsync(request.Id);
 
             project.Update(request.Title, request.Description, request.TotalCost);
 
-            await _dbContext.SaveChangesAsync();
+            await _projectRepository.SaveChangesAsync();
 
             return Unit.Value;
         }

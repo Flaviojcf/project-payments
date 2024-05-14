@@ -10,7 +10,7 @@ namespace Expert.Application.Queries.GetAllSkils
 
         public async Task<List<SkillOutputModel>> Handle(GetAllSkilsQuery request, CancellationToken cancellationToken)
         {
-            var skills = await _skillsRepository.GetAll();
+            var skills = await _skillsRepository.GetAllAsync();
 
             var skillsOutputModel = skills.Select(s => new SkillOutputModel(s.Id, s.Description)).ToList();
 
