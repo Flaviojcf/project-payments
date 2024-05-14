@@ -1,19 +1,15 @@
 ﻿using Expert.Application.OutPutModels;
-using Expert.Infrastructure.Persistance;
+using Expert.Domain.Repositories;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 
 namespace Expert.Application.Queries.GetProjectById
 {
-    internal class GetProjectByIdQueryHandler(ExpertDbContext dbContext) : IRequestHandler<GetProjectByIdQuery, ProjectDetailsOutputModel>
+    internal class GetProjectByIdQueryHandler(IProjectRepository projectRepository) : IRequestHandler<GetProjectByIdQuery, ProjectDetailsOutputModel>
     {
-        private readonly ExpertDbContext _dbContext = dbContext;
+        private readonly IProjectRepository _projectRepository = projectRepository;
         public async Task<ProjectDetailsOutputModel> Handle(GetProjectByIdQuery request, CancellationToken cancellationToken)
         {
-            var project = await _dbContext.Projects
-                .Include(p => p.Client)
-                .Include(p => p.Freelancer)
-                .SingleOrDefaultAsync(p => p.Id == request.Id);
+            var project = await _projectRepository.GetByIdAsync(request.Id);
 
             if (project == null) return null;
 

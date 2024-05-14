@@ -1,18 +1,17 @@
 ﻿using Expert.Application.OutPutModels;
-using Expert.Infrastructure.Persistance;
+using Expert.Domain.Repositories;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 
 namespace Expert.Application.Queries.GetAllProjects
 {
-    internal class GetAllProjectsQueryHandler(ExpertDbContext dbContext) : IRequestHandler<GetAllProjectsQuery, List<ProjectOutputModel>>
+    internal class GetAllProjectsQueryHandler(IProjectRepository projectRepository) : IRequestHandler<GetAllProjectsQuery, List<ProjectOutputModel>>
     {
-        private readonly ExpertDbContext _dbContext = dbContext;
+        private readonly IProjectRepository _projectRepository = projectRepository;
         public async Task<List<ProjectOutputModel>> Handle(GetAllProjectsQuery request, CancellationToken cancellationToken)
         {
-            var projects = _dbContext.Projects;
+            var projects = await _projectRepository.GetAll();
 
-            var projectsOutPut = await projects.Select(p => new ProjectOutputModel(p.Id, p.Title, p.CreatedAt)).ToListAsync();
+            var projectsOutPut = projects.Select(p => new ProjectOutputModel(p.Id, p.Title, p.CreatedAt)).ToList();
 
             return projectsOutPut;
         }

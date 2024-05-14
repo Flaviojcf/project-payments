@@ -1,19 +1,18 @@
 ﻿using Expert.Application.OutPutModels;
-using Expert.Infrastructure.Persistance;
+using Expert.Domain.Repositories;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 
 namespace Expert.Application.Queries.GetAllSkils
 {
-    public class GetAllSkillsQueryHandler(ExpertDbContext dbContext) : IRequestHandler<GetAllSkilsQuery, List<SkillOutputModel>>
+    public class GetAllSkillsQueryHandler(ISkillsRepository skillsRepository) : IRequestHandler<GetAllSkilsQuery, List<SkillOutputModel>>
     {
-        private readonly ExpertDbContext _dbContext = dbContext;
+        private readonly ISkillsRepository _skillsRepository = skillsRepository;
 
         public async Task<List<SkillOutputModel>> Handle(GetAllSkilsQuery request, CancellationToken cancellationToken)
         {
-            var skills = _dbContext.Skills;
+            var skills = await _skillsRepository.GetAll();
 
-            var skillsOutputModel = await skills.Select(s => new SkillOutputModel(s.Id, s.Description)).ToListAsync();
+            var skillsOutputModel = skills.Select(s => new SkillOutputModel(s.Id, s.Description)).ToList();
 
             return skillsOutputModel;
         }
