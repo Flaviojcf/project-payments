@@ -1,9 +1,12 @@
+using Expert.API.Filters;
 using Expert.Application.Commands.CreateProject;
 using Expert.Application.Services.Implementations;
 using Expert.Application.Services.Interfaces;
+using Expert.Application.Validators;
 using Expert.Domain.Repositories;
 using Expert.Infrastructure.Persistance;
 using Expert.Infrastructure.Persistance.Repositories;
+using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,7 +14,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers(options => options.Filters.Add(typeof(ValidationFilter))).AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<CreateUserCommandValidator>());
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -21,6 +24,7 @@ builder.Services.AddScoped<IUserService, UserService>();
 
 builder.Services.AddScoped<IProjectRepository, ProjectRepository>();
 builder.Services.AddScoped<ISkillsRepository, SkillsRepository>();
+builder.Services.AddScoped<IUserRepository, UsersRepository>();
 
 builder.Services.AddMediatR(typeof(CreateProjectCommand));
 
