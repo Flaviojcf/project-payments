@@ -1,4 +1,5 @@
 ﻿using Expert.Application.Commands.CreateUserCommand;
+using Expert.Application.Commands.LoginUser;
 using Expert.Application.Queries.GetUser;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -32,6 +33,14 @@ namespace Expert.API.Controllers
             var id = await _mediator.Send(command);
 
             return CreatedAtAction(nameof(GetById), new { id }, command);
+        }
+
+        [HttpPut("login")]
+        public async Task<IActionResult> Login([FromBody] LoginUserCommand command)
+        {
+            var loginUserOutputModel = await _mediator.Send(command);
+
+            return Ok(loginUserOutputModel);
         }
     }
 }

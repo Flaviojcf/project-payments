@@ -1,9 +1,9 @@
 using Expert.API.Filters;
 using Expert.Application.Commands.CreateProject;
-using Expert.Application.Services.Implementations;
-using Expert.Application.Services.Interfaces;
 using Expert.Application.Validators;
 using Expert.Domain.Repositories;
+using Expert.Domain.Services;
+using Expert.Infrastructure.Auth;
 using Expert.Infrastructure.Persistance;
 using Expert.Infrastructure.Persistance.Repositories;
 using FluentValidation.AspNetCore;
@@ -20,11 +20,11 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<ExpertDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-builder.Services.AddScoped<IUserService, UserService>();
 
 builder.Services.AddScoped<IProjectRepository, ProjectRepository>();
 builder.Services.AddScoped<ISkillsRepository, SkillsRepository>();
 builder.Services.AddScoped<IUserRepository, UsersRepository>();
+builder.Services.AddScoped<IAuthService, AuthService>();
 
 builder.Services.AddMediatR(typeof(CreateProjectCommand));
 

@@ -1,5 +1,6 @@
 ﻿using Expert.Domain.Entities;
 using Expert.Domain.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace Expert.Infrastructure.Persistance.Repositories
 {
@@ -11,6 +12,11 @@ namespace Expert.Infrastructure.Persistance.Repositories
         {
             await _dbContext.Users.AddAsync(user);
             await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task<User> GetUserByEmailAndPasswordAsync(string email, string passwordHash)
+        {
+            return await _dbContext.Users.SingleOrDefaultAsync(u => u.Email == email && u.Password == passwordHash);
         }
     }
 }
