@@ -20,7 +20,7 @@ namespace Expert.Application.Commands.LoginUser
                 return null;
             }
 
-            var token = _authService.GenerateJwtToken(user?.Email, user.Role);
+            var token = _authService.GenerateJwtToken(user.Email, user.Role);
 
             var loginUserOutputModel = new LoginUserOutputModel(user.Email, token);
 

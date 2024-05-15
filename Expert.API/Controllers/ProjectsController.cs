@@ -6,12 +6,14 @@ using Expert.Application.Commands.UpdateProject;
 using Expert.Application.Queries.GetAllProjects;
 using Expert.Application.Queries.GetProjectById;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ExpertAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ProjectsController(IMediator mediator) : ControllerBase
     {
 
