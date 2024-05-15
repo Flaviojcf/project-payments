@@ -16,10 +16,10 @@ namespace ExpertAPI.Controllers
     [Authorize]
     public class ProjectsController(IMediator mediator) : ControllerBase
     {
-
         private readonly IMediator _mediator = mediator;
 
         [HttpGet]
+        [Authorize(Roles = "client, freelancer")]
         public async Task<IActionResult> Get(string query)
         {
             var getAllProjectsQuery = new GetAllProjectsQuery(query);
@@ -30,6 +30,7 @@ namespace ExpertAPI.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize(Roles = "client, freelancer")]
         public async Task<IActionResult> GetById(int id)
         {
             var command = new GetProjectByIdQuery(id);
@@ -45,6 +46,7 @@ namespace ExpertAPI.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "client")]
         public async Task<IActionResult> Post([FromBody] CreateProjectCommand command)
         {
             if (command.Title.Length > 50) return BadRequest();
@@ -55,6 +57,7 @@ namespace ExpertAPI.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "client")]
         public async Task<IActionResult> Put(int id, [FromBody] UpdateProjectCommand command)
         {
             await _mediator.Send(command);
@@ -63,6 +66,7 @@ namespace ExpertAPI.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "client")]
         public async Task<IActionResult> Delete(int id)
         {
             var command = new DeleteProjectCommand(id);
@@ -74,6 +78,7 @@ namespace ExpertAPI.Controllers
 
 
         [HttpPost("{id}/comments")]
+        [Authorize(Roles = "client, freelancer")]
         public async Task<IActionResult> PostComment([FromBody] CreateCommentCommand command)
         {
             await _mediator.Send(command);
@@ -82,6 +87,7 @@ namespace ExpertAPI.Controllers
         }
 
         [HttpPut("{id}/start")]
+        [Authorize(Roles = "client")]
         public async Task<IActionResult> Start(int id)
         {
             var command = new StartProjectCommand(id);
@@ -92,6 +98,7 @@ namespace ExpertAPI.Controllers
         }
 
         [HttpPut("{id}/finish")]
+        [Authorize(Roles = "client")]
         public async Task<IActionResult> Finish(int id)
         {
             var command = new FinishProjectCommand(id);
