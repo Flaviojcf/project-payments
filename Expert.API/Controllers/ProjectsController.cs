@@ -55,8 +55,6 @@ namespace ExpertAPI.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, [FromBody] UpdateProjectCommand command)
         {
-            if (command.Title.Length > 200) return BadRequest();
-
             await _mediator.Send(command);
 
             return NoContent();
