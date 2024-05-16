@@ -4,7 +4,7 @@ using MediatR;
 
 namespace Expert.Application.Queries.GetAllProjects
 {
-    internal class GetAllProjectsQueryHandler(IProjectRepository projectRepository) : IRequestHandler<GetAllProjectsQuery, List<ProjectOutputModel>>
+    public class GetAllProjectsQueryHandler(IProjectRepository projectRepository) : IRequestHandler<GetAllProjectsQuery, List<ProjectOutputModel>>
     {
         private readonly IProjectRepository _projectRepository = projectRepository;
         public async Task<List<ProjectOutputModel>> Handle(GetAllProjectsQuery request, CancellationToken cancellationToken)
