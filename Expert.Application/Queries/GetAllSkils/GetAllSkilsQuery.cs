@@ -3,7 +3,7 @@ using MediatR;
 
 namespace Expert.Application.Queries.GetAllSkils
 {
-    public class GetAllSkilsQuery : IRequest<List<SkillOutputModel>>
+    public class GetAllSkillsQuery : IRequest<List<SkillOutputModel>>
     {
     }
 }

@@ -4,11 +4,11 @@ using MediatR;
 
 namespace Expert.Application.Queries.GetAllSkils
 {
-    public class GetAllSkillsQueryHandler(ISkillsRepository skillsRepository) : IRequestHandler<GetAllSkilsQuery, List<SkillOutputModel>>
+    public class GetAllSkillsQueryHandler(ISkillsRepository skillsRepository) : IRequestHandler<GetAllSkillsQuery, List<SkillOutputModel>>
     {
         private readonly ISkillsRepository _skillsRepository = skillsRepository;
 
-        public async Task<List<SkillOutputModel>> Handle(GetAllSkilsQuery request, CancellationToken cancellationToken)
+        public async Task<List<SkillOutputModel>> Handle(GetAllSkillsQuery request, CancellationToken cancellationToken)
         {
             var skills = await _skillsRepository.GetAllAsync();
 

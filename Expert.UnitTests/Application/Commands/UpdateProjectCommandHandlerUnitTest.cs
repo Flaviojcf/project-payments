@@ -5,7 +5,7 @@ using Moq;
 namespace Expert.UnitTests.Application.Commands
 {
     [Collection(nameof(UpdateProjectCommand))]
-    public class updateProjectCommandHandlerUnitTest
+    public class UpdateProjectCommandHandlerUnitTest
     {
         [Fact]
         [Trait("Application", "UpdateProject - Command")]

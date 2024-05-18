@@ -4,7 +4,7 @@ using MediatR;
 
 namespace Expert.Application.Queries.GetProjectById
 {
-    internal class GetProjectByIdQueryHandler(IProjectRepository projectRepository) : IRequestHandler<GetProjectByIdQuery, ProjectDetailsOutputModel>
+    public class GetProjectByIdQueryHandler(IProjectRepository projectRepository) : IRequestHandler<GetProjectByIdQuery, ProjectDetailsOutputModel>
     {
         private readonly IProjectRepository _projectRepository = projectRepository;
         public async Task<ProjectDetailsOutputModel> Handle(GetProjectByIdQuery request, CancellationToken cancellationToken)
@@ -20,8 +20,8 @@ namespace Expert.Application.Queries.GetProjectById
                 project.TotalCost,
                 project.StartedAt,
                 project.FinishedAt,
-                project.Client.FullName,
-                project.Freelancer.FullName
+                project.Client?.FullName,
+                project.Freelancer?.FullName
                 );
 
             return projectDetailsViewModel;

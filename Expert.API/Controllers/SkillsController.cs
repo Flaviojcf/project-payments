@@ -16,7 +16,7 @@ namespace Expert.API.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var query = new GetAllSkilsQuery();
+            var query = new GetAllSkillsQuery();
 
             var skills = await _mediator.Send(query);
 

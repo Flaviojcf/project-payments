@@ -6,7 +6,7 @@ using Moq;
 namespace Expert.UnitTests.Application.Queries
 {
     [Collection(nameof(GetAllProjectsQueryHandler))]
-    public class GetAllProjectsCommandHandlerUnitTests
+    public class GetAllProjectsQueryHandlerUnitTests
     {
 
         [Fact]
@@ -16,13 +16,13 @@ namespace Expert.UnitTests.Application.Queries
             // Arrange
             var projects = new List<Project>
             {
-                    new Project("Nome", "Descrição", 10, 1, 2),
-                    new Project("Nome", "Descrição2", 20, 1, 2),
-                    new Project("Nome", "Descrição3", 20, 1, 2),
+                    new Project("Name", "Description", 10, 1, 2),
+                    new Project("Name", "Description2", 20, 1, 2),
+                    new Project("Name", "Description3", 20, 1, 2),
             };
 
             var projectRepositoryMock = new Mock<IProjectRepository>();
-            projectRepositoryMock.Setup(p => p.GetAllAsync().Result).Returns(projects);
+            projectRepositoryMock.Setup(p => p.GetAllAsync()).ReturnsAsync(projects);
 
             var getAllProjectsQuery = new GetAllProjectsQuery("");
             var getAllProjectsQueryHandler = new GetAllProjectsQueryHandler(projectRepositoryMock.Object);
@@ -36,7 +36,7 @@ namespace Expert.UnitTests.Application.Queries
             Assert.NotEmpty(projectOutputModelList);
             Assert.Equal(projects.Count, projectOutputModelList.Count);
 
-            projectRepositoryMock.Verify(p => p.GetAllAsync().Result, Times.Once);
+            projectRepositoryMock.Verify(p => p.GetAllAsync(), Times.Once);
         }
     }
 }
