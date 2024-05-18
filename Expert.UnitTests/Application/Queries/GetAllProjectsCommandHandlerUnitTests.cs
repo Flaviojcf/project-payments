@@ -10,7 +10,7 @@ namespace Expert.UnitTests.Application.Queries
     {
 
         [Fact]
-        [Trait("Application", "Project - Querie")]
+        [Trait("Application", "Project - Query")]
         public async Task ThreeProjectsExist_Executed_ReturnThreeProjectOutputModels()
         {
             // Arrange

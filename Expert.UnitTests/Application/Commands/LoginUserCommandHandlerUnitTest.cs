@@ -28,7 +28,6 @@ namespace Expert.UnitTests.Application.Commands
 
             var loginUserCommandHandler = new LoginUserCommandHandler(authServiceMock.Object, userRepositoryMock.Object);
 
-            // Configurar mocks
             authServiceMock.Setup(a => a.ComputeSha256Hash(It.IsAny<string>())).Returns("hashedPassword");
             userRepositoryMock.Setup(r => r.GetUserByEmailAndPasswordAsync(loginUserCommand.Email, "hashedPassword")).ReturnsAsync(user);
             authServiceMock.Setup(a => a.GenerateJwtToken(user.Email, user.Role)).Returns("jwtToken");
