@@ -11,7 +11,7 @@ namespace Expert.Application.Commands.UpdateProject
         {
             var project = await _projectRepository.GetByIdAsync(request.Id);
 
-            project.Update(request.Title, request.Description, request.TotalCost);
+            project?.Update(request.Title, request.Description, request.TotalCost);
 
             await _projectRepository.SaveChangesAsync();
 

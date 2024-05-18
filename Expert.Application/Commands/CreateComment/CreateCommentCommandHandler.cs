@@ -5,7 +5,7 @@ using MediatR;
 
 namespace Expert.Application.Commands.CreateComment
 {
-    internal class CreateCommentCommandHandler(IProjectRepository projectRepository) : IRequestHandler<CreateCommentCommand, Unit>
+    public class CreateCommentCommandHandler(IProjectRepository projectRepository) : IRequestHandler<CreateCommentCommand, Unit>
     {
         private readonly IProjectRepository _projectRepository = projectRepository;
 

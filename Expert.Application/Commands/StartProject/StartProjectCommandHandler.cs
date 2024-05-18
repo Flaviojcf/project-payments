@@ -11,7 +11,7 @@ namespace Expert.Application.Commands.StartProject
         {
             var project = await _projectRepository.GetByIdAsync(request.Id);
 
-            project.Start();
+            project?.Start();
 
             await _projectRepository.SaveChangesAsync();
 
