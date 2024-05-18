@@ -18,12 +18,18 @@ namespace Expert.UnitTests.Domain.Entities
 
             //Assert
             Assert.NotNull(user);
-            Assert.Equal("userName", user.FullName);
             Assert.True(user.Active);
-            Assert.Equal("userEmail@gmail.com", user.Email);
             Assert.Equal(birthDate, user.BirthDate);
+            Assert.Null(user.Comments);
+            Assert.True(user.CreatedAt <= DateTime.Now && user.CreatedAt >= DateTime.Now.AddSeconds(-10));
+            Assert.Equal("userEmail@gmail.com", user.Email);
+            Assert.NotNull(user.FreelanceProjects);
+            Assert.Equal("userName", user.FullName);
+            Assert.Equal(0, user.Id);
+            Assert.NotNull(user.OwnedProjects);
             Assert.Equal("userPassword", user.Password);
             Assert.Equal("userRole", user.Role);
+            Assert.NotNull(user.UserSkills);
         }
     }
 }

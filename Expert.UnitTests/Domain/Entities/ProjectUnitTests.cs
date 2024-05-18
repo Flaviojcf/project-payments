@@ -18,18 +18,23 @@ namespace Expert.UnitTests.Domain.Entities
 
             //Assert
             Assert.NotNull(project);
-            Assert.Equal(ProjecStatusEnum.Created, project.Status);
-            Assert.True(project.CreatedAt <= DateTime.Now && project.CreatedAt >= DateTime.Now.AddSeconds(-1));
-            Assert.Null(project.FinishedAt);
-            Assert.Equal("Nome", project.Title);
+            Assert.Null(project.Client);
+            Assert.NotNull(project.Comments);
+            Assert.True(project.CreatedAt <= DateTime.Now && project.CreatedAt >= DateTime.Now.AddSeconds(-10));
             Assert.Equal("Descrição", project.Description);
-            Assert.Equal(10, project.TotalCost);
+            Assert.Null(project.FinishedAt);
+            Assert.Null(project.Freelancer);
+            Assert.Equal(0, project.Id);
             Assert.Equal(1, project.IdClient);
             Assert.Equal(2, project.IdFreelancer);
+            Assert.Null(project.StartedAt);
+            Assert.Equal(ProjecStatusEnum.Created, project.Status);
+            Assert.Equal("Nome", project.Title);
+            Assert.Equal(10, project.TotalCost);
         }
 
         [Fact]
-        [Trait("Domain", "Project - Aggregates")]
+        [Trait("Domain", "Project  - Aggregates")]
         public void TestIfProjectStartWorks()
         {
             //Arrange
