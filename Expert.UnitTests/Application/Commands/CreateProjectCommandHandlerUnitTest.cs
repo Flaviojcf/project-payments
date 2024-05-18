@@ -5,10 +5,12 @@ using Moq;
 
 namespace Expert.UnitTests.Application.Commands
 {
+    [Collection(nameof(CreateProjectCommandHandler))]
     public class CreateProjectCommandHandlerUnitTest
     {
 
         [Fact]
+        [Trait("Application", "Project - Command")]
         public async Task InputDataIsOk_Executed_ReturnProjectId()
         {
             // Arrange

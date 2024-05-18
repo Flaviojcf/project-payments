@@ -5,10 +5,12 @@ using Moq;
 
 namespace Expert.UnitTests.Application.Queries
 {
+    [Collection(nameof(GetAllProjectsQueryHandler))]
     public class GetAllProjectsCommandHandlerUnitTests
     {
 
         [Fact]
+        [Trait("Application", "Project - Querie")]
         public async Task ThreeProjectsExist_Executed_ReturnThreeProjectOutputModels()
         {
             // Arrange
