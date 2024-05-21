@@ -18,3 +18,15 @@ steps:
   inputs:
     command: 'test'
   displayName: 'Executando Testes'
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'publish'
+    publishWebProjects: true
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'Azure for Students(1b4e9a87-5505-4c00-8d78-4502fef5a176)'
+    appType: 'webAppLinux'
+    WebAppName: 'expert-api-flaviojcf'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+    RuntimeStack: 'DOTNETCORE|7.0'
