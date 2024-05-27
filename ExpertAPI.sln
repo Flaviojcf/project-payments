@@ -20,6 +20,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		azure-pipelines.yml = azure-pipelines.yml
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Payments.API", "Payments.API\Payments.API.csproj", "{E093610C-1612-4325-9A1F-67F144087948}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -46,6 +48,10 @@ Global
 		{F543402D-0E9D-4EE5-8076-F10BD4AD1128}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F543402D-0E9D-4EE5-8076-F10BD4AD1128}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F543402D-0E9D-4EE5-8076-F10BD4AD1128}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E093610C-1612-4325-9A1F-67F144087948}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E093610C-1612-4325-9A1F-67F144087948}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E093610C-1612-4325-9A1F-67F144087948}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E093610C-1612-4325-9A1F-67F144087948}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -4,6 +4,7 @@ using Expert.Application.Validators;
 using Expert.Domain.Repositories;
 using Expert.Domain.Services;
 using Expert.Infrastructure.Auth;
+using Expert.Infrastructure.Payments;
 using Expert.Infrastructure.Persistance;
 using Expert.Infrastructure.Persistance.Repositories;
 using FluentValidation.AspNetCore;
@@ -18,6 +19,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+builder.Services.AddHttpClient();
+
 builder.Services.AddControllers(options => options.Filters.Add(typeof(ValidationFilter))).AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<CreateUserCommandValidator>());
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -29,6 +32,7 @@ builder.Services.AddScoped<IProjectRepository, ProjectRepository>();
 builder.Services.AddScoped<ISkillsRepository, SkillsRepository>();
 builder.Services.AddScoped<IUserRepository, UsersRepository>();
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IPaymentService, PaymentService>();
 
 builder.Services.AddMediatR(typeof(CreateProjectCommand));
 
