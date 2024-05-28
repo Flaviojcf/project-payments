@@ -4,6 +4,6 @@ namespace Expert.Infrastructure.Payments
 {
     public interface IPaymentService
     {
-        Task<bool> ProcessPayment(PaymentInfoDto paymentInfoDto);
+        void ProcessPayment(PaymentInfoDto paymentInfoDto);
     }
 }

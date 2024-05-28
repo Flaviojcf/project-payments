@@ -1,29 +1,23 @@
 ﻿using Expert.Domain.DTOs;
-using Microsoft.Extensions.Configuration;
+using Expert.Domain.Services;
 using System.Text;
 using System.Text.Json;
 
 namespace Expert.Infrastructure.Payments
 {
-    public class PaymentService(IHttpClientFactory httpCLientFactory, IConfiguration configuration) : IPaymentService
+    public class PaymentService(IMessageBusService messageBusService) : IPaymentService
     {
-        private IHttpClientFactory _httpCLientFactory = httpCLientFactory;
-        private readonly string _paymentsBaseUrl = configuration.GetSection("Services:Payments").Value;
+        private readonly IMessageBusService _messageBusService = messageBusService;
+        private const string QUEUE_NAME = "Payments";
 
-        public async Task<bool> ProcessPayment(PaymentInfoDto paymentInfoDto)
+        public void ProcessPayment(PaymentInfoDto paymentInfoDto)
         {
-            var url = $"{_paymentsBaseUrl}/api/payments";
 
             var paymentInfoJson = JsonSerializer.Serialize(paymentInfoDto);
 
-            var paymentInfoContent = new StringContent(paymentInfoJson, Encoding.UTF8, "application/json");
+            var paymentInfoBytes = Encoding.UTF8.GetBytes(paymentInfoJson);
 
-            var httpClient = _httpCLientFactory.CreateClient("Payments");
-
-            var response = await httpClient.PostAsync(url, paymentInfoContent);
-
-            return response.IsSuccessStatusCode;
-
+            _messageBusService.Publish(QUEUE_NAME, paymentInfoBytes);
         }
     }
 }

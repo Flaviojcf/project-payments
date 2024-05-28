@@ -71,6 +71,7 @@ namespace Expert.UnitTests.Domain.Entities
 
             //Act
             project.Start();
+            project.SetPaymentPending();
             project.Finish();
 
             //Assert

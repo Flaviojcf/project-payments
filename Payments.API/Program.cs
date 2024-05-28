@@ -1,3 +1,4 @@
+using Payments.API.Consumers;
 using Payments.API.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +12,8 @@ builder.Services.AddSwaggerGen();
 
 
 builder.Services.AddScoped<IPaymentService, PaymentService>();
+builder.Services.AddHostedService<ProcessPaymentConsumer>();
+
 
 var app = builder.Build();
 

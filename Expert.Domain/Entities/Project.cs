@@ -37,11 +37,17 @@ namespace Expert.Domain.Entities
 
         public void Finish()
         {
-            if (Status == ProjecStatusEnum.InProgress)
+            if (Status == ProjecStatusEnum.PaymentPending)
             {
                 Status = ProjecStatusEnum.Finished;
                 FinishedAt = DateTime.Now;
             }
+        }
+
+        public void SetPaymentPending()
+        {
+            Status = ProjecStatusEnum.PaymentPending;
+            FinishedAt = null;
         }
 
         public void Update(string title, string description, decimal totalCost)

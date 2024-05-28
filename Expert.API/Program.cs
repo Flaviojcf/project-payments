@@ -1,9 +1,11 @@
 using Expert.API.Filters;
 using Expert.Application.Commands.CreateProject;
+using Expert.Application.Consumers;
 using Expert.Application.Validators;
 using Expert.Domain.Repositories;
 using Expert.Domain.Services;
 using Expert.Infrastructure.Auth;
+using Expert.Infrastructure.MessageBus;
 using Expert.Infrastructure.Payments;
 using Expert.Infrastructure.Persistance;
 using Expert.Infrastructure.Persistance.Repositories;
@@ -33,6 +35,8 @@ builder.Services.AddScoped<ISkillsRepository, SkillsRepository>();
 builder.Services.AddScoped<IUserRepository, UsersRepository>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IPaymentService, PaymentService>();
+builder.Services.AddScoped<IMessageBusService, MessageBusService>();
+builder.Services.AddHostedService<PaymentApprovedConsumer>();
 
 builder.Services.AddMediatR(typeof(CreateProjectCommand));
 
