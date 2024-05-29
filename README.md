@@ -28,6 +28,6 @@ Utilizando Clean Architecture e composto por um microserviço de pagamento, gara
 
 ## Contact
 
-[@flavio_jCosta](mailto:flaviojcostafilho@gmail.com) - flaviojcostafilho@gmail.com
+[@Flaviojcf](mailto:flaviojcostafilho@gmail.com) - flaviojcostafilho@gmail.com
 
 
