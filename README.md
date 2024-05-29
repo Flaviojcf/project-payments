@@ -30,6 +30,4 @@ Utilizando Clean Architecture e composto por um microserviço de pagamento, gara
 
 [@flavio_jCosta](mailto:flaviojcostafilho@gmail.com) - flaviojcostafilho@gmail.com
 
-Project Link: [https://github.com/Flaviojcf/projects-payments](https://github.com/Flaviojcf/projects-payments)
 
-<p align="right"><a href="#readme-top">Início</a></p>
